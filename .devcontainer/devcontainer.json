@@ -22,5 +22,17 @@
   // "customizations": {},
 
   // Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
-  "remoteUser": "root"
+"remoteUser": "root",
+"customizations": {
+	"vscode": {
+		"extensions": [
+			"EditorConfig.EditorConfig",
+			"GitHub.copilot",
+			"GitHub.copilot-chat",
+			"golang.go",
+			"DavidAnson.vscode-markdownlint",
+			"redhat.vscode-yaml"
+		]
+	}
+}
 }
