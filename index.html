@@ -7,7 +7,7 @@
 <body>
   <h1>Go WebAssembly</h1>
   <button onClick="run();" id="runButton" disabled>BUTTON</button>
-  <img id="image" />
+  <div><img id="image" /></div>
   <script>
     const go = new Go();
     WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject).then((result) => {
