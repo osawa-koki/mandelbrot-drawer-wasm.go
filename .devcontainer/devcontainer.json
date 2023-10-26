@@ -16,7 +16,7 @@
   "forwardPorts": [8000],
 
   // Uncomment the next line to run commands after the container is created.
-  "postCreateCommand": "cat /etc/os-release && go version && node --version && go mod tidy && npm install",
+  "postCreateCommand": "cat /etc/os-release && go version && node --version && go mod tidy && npm install && chmod +x ./build.sh",
 
   // Configure tool-specific properties.
   // "customizations": {},
