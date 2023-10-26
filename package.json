@@ -1,0 +1,21 @@
+{
+  "name": "mandelbrot-drawer-wasm.go",
+  "version": "1.0.0",
+  "description": "🦇🦇🦇 GoでコンパイルしたWebAssemblyでマンデルブロ集合を描画するサンプルです！",
+  "scripts": {
+    "dev": "http-server -c1 ./public/ -p 8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osawa-koki/mandelbrot-drawer-wasm.go.git"
+  },
+  "author": "osawa-koki <koki@osawa.cloud>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/osawa-koki/mandelbrot-drawer-wasm.go/issues"
+  },
+  "homepage": "https://github.com/osawa-koki/mandelbrot-drawer-wasm.go#readme",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

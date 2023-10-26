@@ -1,0 +1,28 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Go WebAssembly</title>
+  <script src="./wasm_exec.js"></script>
+</head>
+<body>
+  <h1>Go WebAssembly</h1>
+  <script>
+    const go = new Go();
+    WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject).then((result) => {
+      go.run(result.instance);
+      document.getElementById("runButton").disabled = false;
+    }).catch((err) => {
+      console.error(err);
+    });
+
+    function run() {
+      console.log(concat("Hello", " ", "World"))
+      console.log(getElementById("runButton"))
+    }
+  </script>
+
+  <button onClick="run();" id="runButton" disabled>BUTTON</button>
+  <!-- <button type="button" onclick="run()">BUTTON</button> -->
+</body>
+
+</html>
