@@ -1,27 +1,87 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Go WebAssembly</title>
+  <link rel="shortcut icon" href="./tako.png" type="image/x-icon" />
   <script src="./wasm_exec.js"></script>
+  <title>Mandelbrot (go-wasm)</title>
 </head>
 <body>
-  <h1>Go WebAssembly</h1>
-  <button onClick="run();" id="runButton" disabled>BUTTON</button>
+  <h1>Mandelbrot (go-wasm)</h1>
+  <table>
+    <tbody>
+      <tr>
+        <th>xmin</th>
+        <td><input type="number" id="xmin" value="-2.0" step="0.1" /></td>
+      </tr>
+      <tr>
+        <th>ymin</th>
+        <td><input type="number" id="ymin" value="-2.0" step="0.1" /></td>
+      </tr>
+      <tr>
+        <th>xmax</th>
+        <td><input type="number" id="xmax" value="2.0" step="0.1" /></td>
+      </tr>
+      <tr>
+        <th>ymax</th>
+        <td><input type="number" id="ymax" value="2.0" step="0.1" /></td>
+      </tr>
+      <tr>
+        <th>width</th>
+        <td><input type="number" id="width" value="1000" step="100" min="100" /></td>
+      </tr>
+      <tr>
+        <th>height</th>
+        <td><input type="number" id="height" value="1000" step="100" min="100" /></td>
+      </tr>
+      <tr>
+        <th>iterations</th>
+        <td><input type="number" id="iterations" value="100" step="1" min="10" /></td>
+      </tr>
+      <tr>
+        <th>contrast</th>
+        <td><input type="number" id="contrast" value="15" step="1" min="10" /></td>
+      </tr>
+    </tbody>
+  </table>
+  <button onClick="run();" id="draw" disabled>draw</button>
   <div><img id="image" /></div>
   <script>
-    const go = new Go();
-    WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject).then((result) => {
+    const drawElement = document.getElementById('draw')
+    const imgElement = document.getElementById('image')
+
+    const xminElement = document.getElementById('xmin')
+    const yminElement = document.getElementById('ymin')
+    const xmaxElement = document.getElementById('xmax')
+    const ymaxElement = document.getElementById('ymax')
+    const widthElement = document.getElementById('width')
+    const heightElement = document.getElementById('height')
+    const iterationsElement = document.getElementById('iterations')
+    const contrastElement = document.getElementById('contrast')
+
+    const go = new Go()
+    WebAssembly.instantiateStreaming(fetch('main.wasm'), go.importObject).then((result) => {
       go.run(result.instance)
-      document.getElementById("runButton").disabled = false
+      draw.disabled = false
     }).catch((err) => {
       console.error(err)
     })
 
-    const imgElement = document.getElementById('image')
-
     function run() {
-      const base64Data = drawMandelbrot()
+      drawElement.disabled = true
+      imgElement.src = ''
+      const xmin = parseFloat(xminElement.value)
+      const ymin = parseFloat(yminElement.value)
+      const xmax = parseFloat(xmaxElement.value)
+      const ymax = parseFloat(ymaxElement.value)
+      const width = parseInt(widthElement.value)
+      const height = parseInt(heightElement.value)
+      const iterations = parseInt(iterationsElement.value)
+      const contrast = parseInt(contrastElement.value)
+      const base64Data = drawMandelbrot(
+        xmin, ymin, xmax, ymax, width, height, iterations, contrast
+      )
       imgElement.src = 'data:image/png;base64,' + base64Data
+      drawElement.disabled = false
     }
   </script>
 </body>
