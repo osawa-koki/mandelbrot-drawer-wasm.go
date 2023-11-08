@@ -10,7 +10,11 @@
   },
 
   // Features to add to the dev container. More info: https://containers.dev/features.
-  // "features": {},
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/git-lfs:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [8000],
@@ -19,20 +23,19 @@
   "postCreateCommand": "cat /etc/os-release && go version && node --version && go mod tidy && npm install && chmod +x ./build.sh",
 
   // Configure tool-specific properties.
-  // "customizations": {},
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "DavidAnson.vscode-markdownlint",
+        "EditorConfig.EditorConfig",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "golang.go",
+        "redhat.vscode-yaml"
+      ]
+    }
+  },
 
   // Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
-"remoteUser": "root",
-"customizations": {
-	"vscode": {
-		"extensions": [
-			"EditorConfig.EditorConfig",
-			"GitHub.copilot",
-			"GitHub.copilot-chat",
-			"golang.go",
-			"DavidAnson.vscode-markdownlint",
-			"redhat.vscode-yaml"
-		]
-	}
-}
+  "remoteUser": "root"
 }
